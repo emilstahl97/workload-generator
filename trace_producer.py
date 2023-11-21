@@ -138,7 +138,7 @@ for i in range(NUM_COFLOWS):
         sources = np.random.choice(np.arange(0,NUM_INP_PORTS),num_sources,replace=False);
         sources.sort();
         ir = hist_dist_ir.rvs(size=1);
-        num_destinations = min(max(int(num_sources*ir),1),NUM_INP_PORTS);
+        num_destinations = min(max(int(num_sources * ir.item()), 1), NUM_INP_PORTS);
         destinations_set = np.random.choice(np.arange(0,NUM_INP_PORTS),num_destinations,replace=False);
         destinations_set.sort();
 
@@ -148,7 +148,7 @@ for i in range(NUM_COFLOWS):
 
         for s in list(sources):
 
-            num_destinations_s = min(max(1,int((1 + (num_sources - 1)*INTRA_COFLOW_CONTENTION)*ir)),NUM_INP_PORTS);
+            num_destinations_s = min(max(1, int((1 + (num_sources - 1) * INTRA_COFLOW_CONTENTION) * ir.item())), NUM_INP_PORTS);
             # print(num_sources);
             # print(ir);
             # print(num_destinations);
@@ -164,7 +164,7 @@ for i in range(NUM_COFLOWS):
             if(num_sources_d==0):
                 continue;
             num_destinations_actual = num_destinations_actual + 1;
-            total_data_destination = max(int(hist_dist_dd.rvs(size=1)),1);
+            total_data_destination = max(int(hist_dist_dd.rvs(size=1).item()), 1);
             sources_d = destination_source_dict[d];
             sources_d.sort();
             if(DESTINATION_DATA_DIST=='U'):
