@@ -76,7 +76,7 @@ arrival_time_coflows = [];
 inter_arrival_time_coflows = [];
 for C in coflows:
     size = 0;
-    min_size = sys.maxint;
+    min_size = sys.maxsize;
     max_size = -1;
     # destinations_per_source = {};
     # for i in range(NUM_INP_PORTS):
