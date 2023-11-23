@@ -28,6 +28,7 @@ if not os.path.exists('traces'):
     os.mkdir('traces');
 PICKLE_FILE = 'pickles/' + FILE + '.pkl'
 OUTPUT_FILE = 'traces/' + FILE  + '.txt'
+print(OUTPUT_FILE)
 
 fb_trace = 'coflow-benchmark-trace.txt';
 
