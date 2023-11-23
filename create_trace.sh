@@ -7,7 +7,7 @@ echo "Running create_trace.sh"
 echo "Running trace_producer.py"
 
 # Run the trace producer
-trace_file_path=$(python3 ~/workload-generator/trace_producer.py 10 FB-UP 0.9)
+trace_file_path=$(python3 ~/workload-generator/trace_producer.py 1000 FB-UP 0.9)
 
 echo "Finished trace_producer.py"
 
