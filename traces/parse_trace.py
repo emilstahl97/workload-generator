@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 
 def parse_txt_to_json(file_path):
@@ -34,20 +35,16 @@ def parse_txt_to_json(file_path):
 
     return json.dumps(data, indent=2)
 
-if __name__ == "__main__":
-    # Check if the file path is provided as a command line argument
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <file_path>")
-        sys.exit(1)
+# Example usage:
+if len(sys.argv) != 2:
+    print("Usage: python script.py <file_path>")
+    sys.exit(1)
 
-    # Get the file path from the command line argument
-    file_path = sys.argv[1]
+# Get the file path from the command line argument
+file_path = sys.argv[1]
+base_name = os.path.splitext(os.path.basename(file_path))[0]
+parsed_data = parse_txt_to_json(file_path)
 
-    # Call the function with the provided file path
-    parsed_data = parse_txt_to_json(file_path)
-
-    # Save the parsed data to a json file
-    with open(file_path.replace('.txt', '.json'), 'w') as file:
-        file.write(parsed_data)
-
-    print(f"Data successfully parsed from {file_path} and saved to {file_path.replace('.txt', '.json')}")
+# save the parsed data to a json file
+with open(file_path.replace('.txt', '.json'), 'w') as file:
+    file.write(parsed_data)
