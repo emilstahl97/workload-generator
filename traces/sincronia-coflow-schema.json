@@ -1,0 +1,27 @@
+{
+  "num_inp_ports": 150,
+  "num_coflows": 2000,
+  "coflows": [
+    {
+      "coflow_id": 0,
+      "arrival_time": 1219,
+      "num_flows": 832,
+      "num_sources": 64,
+      "num_destinations": 13,
+      "flows": [
+        {"source_id": 0.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 2.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 3.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 7.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 9.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 14.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 17.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 19.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 20.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 22.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 25.0, "dest_id": 27.0, "size_mb": 1.0},
+        {"source_id": 26.0, "dest_id": 27.0, "size_mb": 1.0}
+      ]
+    }
+  ]
+}
