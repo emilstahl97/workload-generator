@@ -1,11 +1,11 @@
-import os
-import sys
 import scapy.all as scapy
-import json
+import ijson
+import sys
+import os
 
 def generate_packet(source_ip, dest_ip, size_mb):
     # Create an IP packet with payload based on size_mb
-    packet = scapy.IP(src=source_ip, dst=dest_ip) / scapy.Raw(load='A' * int(size_mb * 1024 * 1024))
+    packet = scapy.IP(src=source_ip, dst=dest_ip) / scapy.Raw(load='A' * int(size_mb))
     return packet
 
 def generate_coflow_packets(coflow):
@@ -20,16 +20,21 @@ def generate_coflow_packets(coflow):
         packet = generate_packet(source_ip, dest_ip, size_mb)
         yield packet
 
-def generate_trace_from_json(json_file, chunk_size=10):
+def generate_trace_from_json(json_file):
     with open(json_file, 'r') as f:
-        data = json.load(f)
+        json_parser = ijson.items(f, 'coflows.item')
 
-    trace_packets = []
-    for coflow in data["coflows"]:
-        trace_packets.extend(generate_coflow_packets(coflow))
+        trace_packets = []
+        for coflow in json_parser:
+            print(f"Generating packets for coflow {coflow['coflow_id']}")
+            trace_packets.extend(generate_coflow_packets(coflow))
 
-    for i in range(0, len(trace_packets), chunk_size):
-        yield trace_packets[i:i+chunk_size]
+            # Adjust the condition based on your needs
+            if len(trace_packets) > 1000:
+                yield trace_packets
+                trace_packets = []
+
+        yield trace_packets
 
 def save_trace_to_pcap(trace_packets, pcap_file):
     for i, chunk in enumerate(trace_packets):
@@ -45,7 +50,6 @@ if __name__ == "__main__":
     json_file = sys.argv[1]
     base_name = os.path.splitext(os.path.basename(json_file))[0]
     pcap_file = f"{base_name}.pcap"
-    chunk_size = 10
 
-    trace_packets = generate_trace_from_json(json_file, chunk_size=chunk_size)
+    trace_packets = generate_trace_from_json(json_file)
     save_trace_to_pcap(trace_packets, pcap_file)
